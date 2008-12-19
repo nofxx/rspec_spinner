@@ -6,7 +6,7 @@ require "rspec_spinner/spinner"
 require "rspec_spinner/bar"
 
 module RspecSpinner
-  VERSION = '0.2.8'
+  VERSION = '0.3.0'
 end
 
 #module Spec
