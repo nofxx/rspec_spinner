@@ -15,7 +15,7 @@ Or this:
   46%  \                                                          ETA:  00:00:23
   
 
-No dots and Fs, just what you need to know: failures, pendings e slow ones. 
+No dots and Fs, just what you need to know: FAILURES, PENDINGS and SLOW ones. 
 
 
 == TO USE:
@@ -27,7 +27,7 @@ Require RspecSpinner on spec/spec_helper.rb:
   ...
   
 
-Change your spec.opts --formatter to "spinner":
+Change your spec.opts --formatter to:
 
   --formatter RspecSpinner::Bar
   
@@ -47,7 +47,7 @@ Have fun!
 
 == INSTALL:
 
-  sudo gem install nofxx-rspec-spinner
+  sudo gem install nofxx-rspec_spinner
   
 
 == LICENSE:
