@@ -1,0 +1,59 @@
+= rspec-spinner
+
+* http://github.com/nofxx/rspec-spinner
+
+Adds an extra formatter that looks like this:
+
+  Foo::Error ......
+  SLOW SPEC: 10.0314  Foo should raise Bar
+  PENDING SPEC: Foo should get Bar
+  891/1808:  49% |=======================                        | ETA:  00:00:21
+
+   
+Or this:
+
+  46%  \                                                          ETA:  00:00:23
+  
+
+No dots and Fs, just what you need to know: failures, pendings e slow ones. 
+
+
+== TO USE:
+
+Require RspecSpinner on spec/spec_helper.rb:
+
+  require 'spec'
+  require 'rspec_spinner'
+  ...
+  
+
+Change your spec.opts --formatter to "spinner":
+
+  --formatter RspecSpinner::Bar
+  
+or:
+
+  --formatter RspecSpinner::Spinner
+                            
+                            
+Have fun! 
+
+
+== REQUIREMENTS:
+
+* rspec
+* rtui (http://github.com/nofxx/rtui)
+
+
+== INSTALL:
+
+  sudo gem install nofxx-rspec-spinner
+  
+
+== LICENSE:
+
+(The MIT License)
+
+Based on the Advanced Progress Bar by Nicholas A. Evans
+
+Copyright (c) 2008 Marcos Piccinini
