@@ -18,6 +18,11 @@ Or this:
 No dots and Fs, just what you need to know: FAILURES, PENDINGS and SLOW ones. 
 
 
+== INSTALL:
+
+  sudo gem install rspec_spinner
+
+
 == TO USE:
 
 Require RspecSpinner on spec/spec_helper.rb:
@@ -37,18 +42,13 @@ or:
                             
                             
 Have fun! 
-
+  
 
 == REQUIREMENTS:
 
 * rspec
 * rtui (http://github.com/nofxx/rtui)
 
-
-== INSTALL:
-
-  sudo gem install nofxx-rspec_spinner
-  
 
 == LICENSE:
 
