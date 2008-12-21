@@ -7,7 +7,12 @@ module RspecSpinner
       @total       = example_count
       @error_state = :all_passing
       @pbar        = Rtui::Progress.new("#{example_count} examples", example_count,
-      {:out => output, :components => [:percentage, :spinner, :stat]})
+      {:out => output, :components => [:percentage, :spinner, :subject, :stat]})
+    end
+
+    def example_started(example)
+      @pbar.subject = example.description
+      super
     end
   end
 end

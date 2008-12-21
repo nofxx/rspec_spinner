@@ -13,10 +13,12 @@ module RspecSpinner
 
     def start(example_count)
       @current     = 0
+     # @subject     = "oi"
       @total       = example_count
       @error_state = :all_passing
       @pbar        = Rtui::Progress.new("#{example_count} examples", example_count,
       {:out => output, :components => [:percentage, :spinner, :stat]})
+      @pbar.subject = "Starting..."
     end
 
     def example_started(example)
@@ -45,6 +47,7 @@ module RspecSpinner
     end
 
     def start_dump
+      @pbar.subject = ""
       with_color do
         @pbar.finish
       end
@@ -83,6 +86,7 @@ module RspecSpinner
         @pbar.instance_variable_set("@previous", 0)
         @pbar.instance_variable_set("@title", "#{current}/#{total}")
         @pbar.inc
+      #  @pbar.subject = @subject if @subject
       end
       output.flush
     end

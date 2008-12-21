@@ -13,7 +13,7 @@ $hoe = Hoe.new('rspec_spinner', RspecSpinner::VERSION) do |p|
   p.rubyforge_name       = p.name # TODO this is default value
   p.extra_deps         = [
      ['rspec','>=1.1.11'],
-     ['rtui','>= 0.0.2']
+     ['rtui','>= 0.1.8']
   ]
   p.extra_dev_deps = [
     ['newgem', ">= #{::Newgem::VERSION}"]
