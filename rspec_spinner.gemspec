@@ -2,11 +2,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{rspec_spinner}
-  s.version = "0.4.5"
+  s.version = "0.4.8"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Marcos Piccinini"]
-  s.date = %q{2008-12-21}
+  s.date = %q{2008-12-22}
   s.description = %q{Some extra formatters for rspec}
   s.email = ["x@nofxx.com"]
   s.extra_rdoc_files = ["History.txt", "Manifest.txt", "PostInstall.txt", "README.rdoc"]

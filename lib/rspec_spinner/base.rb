@@ -13,12 +13,10 @@ module RspecSpinner
 
     def start(example_count)
       @current     = 0
-     # @subject     = "oi"
       @total       = example_count
       @error_state = :all_passing
       @pbar        = Rtui::Progress.new("#{example_count} examples", example_count,
       {:out => output, :components => [:percentage, :spinner, :stat]})
-      @pbar.subject = "Starting..."
     end
 
     def example_started(example)
@@ -35,7 +33,8 @@ module RspecSpinner
 
     # third param is optional, because earlier versions of rspec sent only two args
     def example_pending(example, message, pending_caller=nil)
-      immediately_dump_pending(example.full_description, message, pending_caller)
+      desc = example.respond_to?(:full_description) ? example.full_description : example.description
+      immediately_dump_pending(desc, message, pending_caller)
       mark_error_state_pending
       increment
     end
@@ -76,7 +75,8 @@ module RspecSpinner
     def immediately_dump_pending(desc, msg, called_from)
       erase_current_line
       output.puts yellow("PENDING SPEC:") + " #{desc} (#{msg})"
-      output.puts "  Called from #{called_from}" if called_from
+      output.puts format_backtrace("  Called from #{called_from}") if called_from
+      output.puts
     end
 
     def increment
@@ -86,7 +86,6 @@ module RspecSpinner
         @pbar.instance_variable_set("@previous", 0)
         @pbar.instance_variable_set("@title", "#{current}/#{total}")
         @pbar.inc
-      #  @pbar.subject = @subject if @subject
       end
       output.flush
     end
