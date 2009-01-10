@@ -46,10 +46,6 @@ module RspecSpinner
     end
 
     def start_dump
-      @pbar.subject = ""
-      with_color do
-        @pbar.finish
-      end
       output.flush
     end
 
@@ -94,6 +90,7 @@ module RspecSpinner
       :all_passing  => "\e[32m", # green
       :some_pending => "\e[33m", # yellow
       :some_failed  => "\e[31m", # red
+      :pending_fix  => "\e[34m", # blue
     }
 
     def with_color

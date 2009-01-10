@@ -1,7 +1,6 @@
 module RspecSpinner
   class Spinner < RspecSpinnerBase
 
-
     def start(example_count)
       @current     = 0
       @total       = example_count
@@ -13,9 +12,10 @@ module RspecSpinner
 
     def example_started(example)
       # this is strange , w/o this mouth work, you got some weird lines
-      desc = example.description.to_s.chop.chomp.chop
+      desc = example.description.to_s.chop.chomp
       @pbar.subject = desc 
       super
     end
+
   end
 end
