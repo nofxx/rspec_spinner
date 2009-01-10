@@ -12,6 +12,8 @@ rspec_spinner.gemspec
 script/console
 script/destroy
 script/generate
+spec/rspec_spinner/base_spec.rb
+spec/rspec_spinner/spinner_spec.rb
 spec/rspec_spinner_spec.rb
 spec/spec.opts
 spec/spec_helper.rb

@@ -12,7 +12,7 @@ Adds an extra formatter that looks like this:
    
 Or this:
 
-  46%  \                                                          ETA:  00:00:23
+  46%  \   should get Bar                                          ETA:  00:00:23
   
 
 No dots and Fs, just what you need to know: FAILURES, PENDINGS and SLOW ones. 
@@ -46,7 +46,7 @@ Have fun!
 
 == REQUIREMENTS:
 
-* rspec
+* rspec (http://github.com/dchemlinksy/rspec)
 * rtui (http://github.com/nofxx/rtui)
 
 

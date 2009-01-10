@@ -11,8 +11,7 @@ module RspecSpinner
     end
 
     def example_started(example)
-      # this is strange , w/o this mouth work, you got some weird lines
-      desc = example.description.to_s.chop.chomp
+      desc = example.description.gsub(/\r|\n/, "")
       @pbar.subject = desc 
       super
     end

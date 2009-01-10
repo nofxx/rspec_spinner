@@ -5,8 +5,8 @@ require File.dirname(__FILE__) + '/lib/rspec_spinner'
 # Run 'rake -T' to see list of generated tasks (from gem root directory)
 $hoe = Hoe.new('rspec_spinner', RspecSpinner::VERSION) do |p|
   p.developer('Marcos Piccinini', 'x@nofxx.com')
-  p.summary = "Some extra formatters for rspec"
-  p.description = "Some extra formatters for rspec"
+  p.summary = "Extra formatters for Rspec"
+  p.description = "Extra formatters for Rspec"
   p.url = "http://github.com/nofxx/postgis_adapter"
   p.changes              = p.paragraphs_of("History.txt", 0..1).join("\n\n")
   p.post_install_message = 'PostInstall.txt' 
