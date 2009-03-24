@@ -70,7 +70,7 @@ describe "Base" do
       @options.should_receive(:colour).and_return(true)
       @formatter.start(1)
       @mock_fail = mock("Fail", :__full_description => "Error Failed")
-      @formatter.example_failed("spec", 98, Spec::Runner::Reporter::Failure.new(@mock_fail, RuntimeError.new))
+      @formatter.example_failed("spec", 98, Spec::Runner::Reporter::Failure.new(@mock_fail, RuntimeError.new, "oi"))
       @io.string.should eql("\r                                                                               \r1 examples:   0% |                                             | ETA:  --:--:--\r\e[K\n98) \e[35mRuntimeError in 'Error Failed'\nRuntimeError\e[0m\n\n\n1/1: 100% |====================================================| ETA:  00:00:00\r")
     end
 
@@ -79,7 +79,7 @@ describe "Base" do
       @options.should_receive(:colour).and_return(true)
       @formatter.start(1)
       @mock_fail = mock("Fail", :__full_description => "Pending Fixed")
-      @formatter.example_failed("spec", 98, Spec::Runner::Reporter::Failure.new(@mock_fail, Spec::Example::PendingExampleFixedError.new))
+      @formatter.example_failed("spec", 98, Spec::Runner::Reporter::Failure.new(@mock_fail, Spec::Example::PendingExampleFixedError.new, nil))
       @io.string.should eql("\r                                                                               \r1 examples:   0% |                                             | ETA:  --:--:--\r\e[K\n98) \e[34m'Pending Fixed' FIXED\nSpec::Example::PendingExampleFixedError\e[0m\n\n\n1/1: 100% |====================================================| ETA:  00:00:00\r")
     end
 
@@ -103,7 +103,7 @@ describe "Base" do
     it "should not dump anything on the end" do
       @formatter.dump_failure.should be_nil
     end
-    
+
     it "should ignore method missing" do
       @formatter.method_missing(:foo).should be_nil
     end

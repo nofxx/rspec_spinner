@@ -11,9 +11,13 @@ module RspecSpinner
     end
 
     def example_started(example)
-      desc = example.description.gsub(/\r|\n/, "")
-      @pbar.subject = desc 
+      desc = clean_text example.respond_to?(:description) ? example.description : example
+      @pbar.subject = desc
       super
+    end
+
+    def clean_text(text)
+      text.respond_to?(:gsub) ? text.gsub(/\r|\n|\t/, "") : "No Description"
     end
 
   end

@@ -62,7 +62,8 @@ module RspecSpinner
       erase_current_line
       output.puts
       output.print "#{counter.to_s}) "
-      output.puts colourise("#{failure.header}\n#{failure.exception.message}", failure)
+      # Rspec 1.2.2
+      output.puts colorize_failure("#{failure.header}\n#{failure.exception.message}", failure)
       output.puts format_backtrace(failure.exception.backtrace)
       output.puts
     end
