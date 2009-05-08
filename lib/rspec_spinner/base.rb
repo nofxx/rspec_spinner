@@ -26,15 +26,14 @@ module RspecSpinner
 
     def example_passed(example)
       print_warning_if_slow(example_group.description,
-                            example.description,
+                            example.description, example.location,
                             Time.now - @start_time)
       increment
     end
 
     # third param is optional, because earlier versions of rspec sent only two args
-    def example_pending(example, message, pending_caller=nil)
-      desc = example.respond_to?(:full_description) ? example.full_description : example.description
-      immediately_dump_pending(desc, message, pending_caller)
+    def example_pending(example, message, deprecated_pending_location=nil)
+      immediately_dump_pending(example.description, message, example.location)
       mark_error_state_pending
       increment
     end
@@ -69,10 +68,10 @@ module RspecSpinner
     end
 
     # stolen and modified from BaseTextFormatter#dump_pending
-    def immediately_dump_pending(desc, msg, called_from)
+    def immediately_dump_pending(desc, msg, location)
       erase_current_line
       output.puts yellow("PENDING SPEC:") + " #{desc} (#{msg})"
-      output.puts format_backtrace("  Called from #{called_from}") if called_from
+      output.puts format_backtrace("  Called from #{location}")
       output.puts
     end
 
@@ -113,12 +112,12 @@ module RspecSpinner
       output.print "\e[K"
     end
 
-    def print_warning_if_slow(group, example, elapsed)
+    def print_warning_if_slow(group, example, location, elapsed)
       if elapsed > THRESHOLD
         #mark_error_state(:pending)
         erase_current_line
         output.print yellow("SLOW SPEC: #{sprintf("%.4f", elapsed)} ")
-        output.print " #{group} #{example}"
+        output.print "  FROM: #{location} / #{group} #{example}"
         output.puts
       end
     end

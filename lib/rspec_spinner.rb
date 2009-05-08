@@ -5,10 +5,6 @@ require "rspec_spinner/base"
 require "rspec_spinner/spinner"
 require "rspec_spinner/bar"
 
-module RspecSpinner
-  VERSION = '0.5.2'
-end
-
 #module Spec
 #  module Runner
 #    class Options

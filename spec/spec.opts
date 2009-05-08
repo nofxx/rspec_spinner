@@ -1,2 +1,4 @@
 --colour
 --diff
+--reverse
+--format progress
