@@ -11,6 +11,11 @@ module RspecSpinner
 
     attr_reader :total, :current
 
+    def initialize(options, where)
+      super
+      @example_times = []
+    end
+
     def start(example_count)
       @current     = 0
       @total       = example_count
@@ -25,9 +30,9 @@ module RspecSpinner
     end
 
     def example_passed(example)
-      print_warning_if_slow(example_group.description,
-                            example.description, example.location,
-                            Time.now - @start_time)
+      ex = [example_group.description, example.description, example.location, Time.now - @start_time]
+      print_warning_if_slow(*ex)
+      @example_times << ex
       increment
     end
 
@@ -46,6 +51,19 @@ module RspecSpinner
 
     def start_dump
       output.flush
+      super
+      @output.puts "\n\nTop 15 slowest examples:\n"
+
+      @example_times = @example_times.sort_by do |description, example, location, time|
+        time
+      end.reverse
+
+      @example_times[0..14].each do |description, example, location, time|
+        _,line = location.split(":")
+        @output.print red(sprintf("%.7f", time))
+        @output.puts " #{description}:#{line} #{example}"
+      end
+      @output.flush
     end
 
     def dump_failure(*args)

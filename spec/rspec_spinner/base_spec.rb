@@ -12,7 +12,7 @@ describe "Base" do
 
   it "should produce line break on start dump" do
     @formatter.start_dump
-    @io.string.should eql("")
+    @io.string.should eql("\n\nTop 10 slowest examples:\n")
   end
 
   it "should produce standard summary without pending when pending has a 0 count" do
@@ -48,7 +48,6 @@ describe "Base" do
     end
 
     it "should update status and go green for passing spec" do
-      pending
       @example = mock("Example", :description => "Foo") #@passing_group.examples.first
       @io.should_receive(:tty?).and_return(true)
       @options.should_receive(:colour).and_return(true)
@@ -96,9 +95,9 @@ describe "Base" do
     it "should push slow specs" do
       # @io.should_receive(:tty?).and_return(true)
       @options.should_receive(:colour).and_return(true)
-      Time.should_receive(:now).and_return(Date.parse "10/10/2000 10:10:10")
-      Time.should_receive(:now).and_return(Date.parse "10/10/2009 10:10:10")
+      Time.should_receive(:now).at_least(11).times.and_return(Date.parse("10/10/2000 10:10:10"), Date.parse("10/10/2009 10:10:10"))
       @mock_slow = mock("SLOW", :description => "Pending Fixed", :location => "Foo")
+      @formatter.should_receive(:example_group).and_return(mock("Group", :description => "Cool"))
       @formatter.start(1)
       @formatter.example_started(@mock_slow)
       @formatter.example_passed(@mock_slow)
@@ -112,6 +111,20 @@ describe "Base" do
 
     it "should not dump anything on the end" do
       @formatter.dump_failure.should be_nil
+    end
+
+    it "should dump the slowest ones in the end" do
+
+              @options.should_receive(:colour).and_return(true)
+        @options.should_receive(:autospec).and_return(true)
+        @formatter.start(1)
+        @mock_message = mock("PENDING", :description => "Oi", :backtrace => "Bad", :location => "Foo l 20")
+        @formatter.example_pending(@mock_message, "Teste")
+        @io.string.should eql("\r
+    @formatter.start_dump
+    @io.string.should eql("\n\nTop 10 slowest examples:\n")
+
+
     end
 
     it "should ignore method missing" do

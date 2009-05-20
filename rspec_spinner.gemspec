@@ -2,11 +2,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{rspec_spinner}
-  s.version = "1.0.0"
+  s.version = "1.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Marcos Augusto"]
-  s.date = %q{2009-05-08}
+  s.date = %q{2009-05-20}
   s.email = %q{Cool Extra formatters for Rspec}
   s.extra_rdoc_files = [
     "README.rdoc"
@@ -30,17 +30,16 @@ Gem::Specification.new do |s|
      "spec/spec.opts",
      "spec/spec_helper.rb"
   ]
-  s.has_rdoc = true
   s.homepage = %q{http://github.com/nofxx/rspec_spinner}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.2}
+  s.rubygems_version = %q{1.3.3}
   s.summary = %q{Extra formatters for Rspec}
   s.test_files = [
-    "spec/rspec_spinner/spinner_spec.rb",
-     "spec/rspec_spinner/base_spec.rb",
-     "spec/spec_helper.rb",
-     "spec/rspec_spinner_spec.rb"
+    "spec/rspec_spinner/base_spec.rb",
+     "spec/rspec_spinner/spinner_spec.rb",
+     "spec/rspec_spinner_spec.rb",
+     "spec/spec_helper.rb"
   ]
 
   if s.respond_to? :specification_version then
