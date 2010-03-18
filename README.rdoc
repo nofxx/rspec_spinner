@@ -34,11 +34,11 @@ Require RspecSpinner on spec/spec_helper.rb:
 
 Change your spec.opts --formatter to:
 
-  --formatter RspecSpinner::Bar
+  --format RspecSpinner::Bar
   
 or:
 
-  --formatter RspecSpinner::Spinner
+  --format RspecSpinner::Spinner
                             
                             
 Have fun! 
