@@ -1,56 +1,60 @@
-= rspec-spinner
+= rspec_spinner
 
 * http://github.com/nofxx/rspec-spinner
 
-Adds an extra formatter that looks like this:
+Adds extra formatters that looks like this:
 
   Foo::Error ......
   SLOW SPEC: 10.0314  Foo should raise Bar
   PENDING SPEC: Foo should get Bar
   891/1808:  49% |=======================                        | ETA:  00:00:21
 
-   
+
 Or this:
 
   46%  \   should get Bar                                          ETA:  00:00:23
-  
-
-No dots and Fs, just what you need to know: FAILURES, PENDINGS and SLOW ones. 
 
 
-== INSTALL:
-
-  sudo gem install rspec_spinner
+No dots and Fs, just what you need to know: FAILURES, PENDINGS and SLOW ones.
 
 
-== TO USE:
+== Install
+
+  gem install rspec_spinner
+
+
+== Use
 
 Require RspecSpinner on spec/spec_helper.rb:
 
   require 'spec'
   require 'rspec_spinner'
   ...
-  
+
 
 Change your spec.opts --format to:
 
   --format RspecSpinner::Bar
-  
+
 or:
 
   --format RspecSpinner::Spinner
-                            
-                            
-Have fun! 
-  
 
-== REQUIREMENTS:
+
+Have fun!
+
+
+== Requirements
+
+* rtui  (http://github.com/nofxx/rtui)
+
+Works with:
 
 * rspec (http://github.com/dchemlinksy/rspec)
-* rtui (http://github.com/nofxx/rtui)
+* ...Need to work in an agnostic version...
 
 
-== LICENSE:
+== License
 
 (The MIT License)
 

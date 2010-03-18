@@ -9,11 +9,30 @@ begin
     gem.email = "Cool Extra formatters for Rspec"
     gem.homepage = "http://github.com/nofxx/rspec_spinner"
     gem.authors = ["Marcos Augusto"]
-    gem.add_dependency 'rspec' # ,'>=1.1.11'],
-    gem.add_dependency 'rtui' #,'>= 0.1.8']
-    # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
-  end
+    gem.add_dependency 'rtui'
+    gem.add_development_dependency 'rspec'
+    gem.post_install_message = <<-POST_INSTALL_MESSAGE
 
+50% |========= RSPEC_SPINNER =========|
+
+Require it on spec/spec_helper.rb:
+
+  require 'spec'
+  require 'rspec_spinner'
+  ...
+
+Change your spec.opts --format to:
+
+  --format RspecSpinner::Bar
+
+or:
+
+  --format RspecSpinner::Spinner
+
+Have fun!
+
+POST_INSTALL_MESSAGE
+  end
 rescue LoadError
   puts "Jeweler (or a dependency) not available. Install it with: sudo gem install jeweler"
 end
