@@ -12,7 +12,7 @@ describe "Base" do
 
   it "should produce line break on start dump" do
     @formatter.start_dump
-    @io.string.should eql("\n\nTop 10 slowest examples:\n")
+    @io.string.should eql("\n\nTop 15 slowest examples:\n")
   end
 
   it "should produce standard summary without pending when pending has a 0 count" do
@@ -44,17 +44,18 @@ describe "Base" do
       @formatter.example_pending(example, "message", "file/here:35")
       @io.rewind
       @formatter.dump_summary(3, 2, 1, 1)
-      @io.string.should eql("\nFinished in 3 seconds\n\n2 examples, 1 failure, 1 pending\n                       \r1 examples:   0% |                                             | ETA:  --:--:--\r\e[KPENDING SPEC: pending (message)\n  Called from ./spec/rspec_spinner/base_spec.rb:35:\n\n1/1: 100% |====================================================| ETA:  00:00:00\r")
+      @io.string.should eql("\nFinished in 3 seconds\n\n2 examples, 1 failure, 1 pending\n                       \r1 examples:   0% |                                             | ETA:  --:--:--\r\e[KPENDING SPEC: pending (message)\n  Called from /home/nofxx/git/rspec_spinner/spec/rspec_spinner/base_spec.rb:35:\n\n1/1: 100% |====================================================| ETA:  00:00:00\r")
     end
 
     it "should update status and go green for passing spec" do
-      @example = mock("Example", :description => "Foo") #@passing_group.examples.first
+      @example = mock("Example", :description => "Foo", :location => "/foo/bar:45") #@passing_group.examples.first
       @io.should_receive(:tty?).and_return(true)
       @options.should_receive(:colour).and_return(true)
       @formatter.start(1)
-      #@formatter.example_started(example)
+      @formatter.example_started(@example)
+      @formatter.should_receive(:example_group).and_return(mock("Group", :description => "Cool"))
       @formatter.example_passed(@example)
-      @io.string.should == "\e[32m.\e[0m"
+      @io.string.should == "\r     \r1 examples:   0% |                                             | ETA:  --:--:--\r\e[32m1/1: 100% |====================================================| ETA:  00:00:00\r\e[0m"
     end
 
     describe "Pending" do
@@ -63,7 +64,7 @@ describe "Base" do
         @options.should_receive(:colour).and_return(true)
         @options.should_receive(:autospec).and_return(true)
         @formatter.start(1)
-        @mock_message = mock("PENDING", :description => "Oi", :backtrace => "Bad", :location => "Foo l 20")
+        @mock_message = mock("PENDING", :description => "Oi", :backtrace => ["Bad", "Ugly"], :location => "Foo l 20")
         @formatter.example_pending(@mock_message, "Teste")
         @io.string.should eql("\r                                                                               \r1 examples:   0% |                                             | ETA:  --:--:--\r\e[K\e[33mPENDING SPEC:\e[0m Oi (Teste)\n  Called from Foo l 20\n\n1/1: 100% |====================================================| ETA:  00:00:00\r")
       end
@@ -101,7 +102,7 @@ describe "Base" do
       @formatter.start(1)
       @formatter.example_started(@mock_slow)
       @formatter.example_passed(@mock_slow)
-      @io.string.should eql("\r                                                                               \r1 examples:   0% |                                             | ETA:  --:--:--\r\e[32m1/1: 100% |====================================================| ETA:  00:00:00\r\e[0m")
+      @io.string.should eql("\r    \r1 examples:   0% |                                             | ETA:  --:--:--\r1/1: 100% |====================================================| ETA:  00:00:00\r")
     end
 
     it "should push some stuff on start" do
@@ -114,17 +115,17 @@ describe "Base" do
     end
 
     it "should dump the slowest ones in the end" do
+      @options.should_receive(:colour).and_return(true)
+      @options.should_receive(:autospec).and_return(true)
+      @formatter.start(1)
+      @mock_message = mock("PASS", :description => "Oi", :backtrace => ["Bad", "Ugly"], :location => "Foo l 20")
+      @formatter.should_receive(:example_group).and_return(mock("Group", :description => "Cool"))
+      @formatter.example_started(@mock_message)
+      @formatter.example_passed(@mock_message)
+      @io.string.should eql("\r\n    \r1 examples:   0% |                                             | ETA:  --:--:--\r1/1: 100% |====================================================| ETA:  00:00:00\r")
+      @formatter.start_dump"\r    \r1 examples:   0% |                                             | ETA:  --:--:--\r1/1: 100% |====================================================| ETA:  00:00:00\r"
 
-              @options.should_receive(:colour).and_return(true)
-        @options.should_receive(:autospec).and_return(true)
-        @formatter.start(1)
-        @mock_message = mock("PENDING", :description => "Oi", :backtrace => "Bad", :location => "Foo l 20")
-        @formatter.example_pending(@mock_message, "Teste")
-        @io.string.should eql("\r
-    @formatter.start_dump
-    @io.string.should eql("\n\nTop 10 slowest examples:\n")
-
-
+      @io.string.should eql("\n\nTop 10 slowest examples:\n")
     end
 
     it "should ignore method missing" do
