@@ -32,7 +32,7 @@ Require RspecSpinner on spec/spec_helper.rb:
   ...
   
 
-Change your spec.opts --formatter to:
+Change your spec.opts --format to:
 
   --format RspecSpinner::Bar
   
