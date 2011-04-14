@@ -74,9 +74,9 @@ module RspecSpinner
       # ignore
     end
 
-    def self.fmt_backtrace
-      return "" if backtrace.nil?
-      backtrace
+    def self.fmt_backtrace(bkt)
+      return "" if bkt.nil?
+      bkt
     end
 
     # stolen and slightly modified from BaseTextFormatter#dump_failure
