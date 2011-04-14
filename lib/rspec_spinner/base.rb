@@ -96,7 +96,7 @@ module RspecSpinner
     def immediately_dump_pending(desc, msg, location)
       erase_current_line
       output.puts yellow("PENDING SPEC:") + " #{desc} (#{msg})"
-      output.puts format_backtrace("  Called from #{location}")
+      output.puts fmt_backtrace("  Called from #{location}")
       output.puts
     end
 
