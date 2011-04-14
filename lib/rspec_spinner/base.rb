@@ -17,11 +17,11 @@ module RspecSpinner
     end
 
     def start(example_count)
-      @current     = 0
-      @total       = example_count
+      @current = 0
+      @total = example_count
       @error_state = :all_passing
-      @pbar        = RTUI::Progress.new("#{example_count} examples", example_count,
-      {:out => output, :components => [:percentage, :spinner, :stat]})
+      @pbar = RTUI::Progress.new("#{example_count} examples", example_count,
+                                 {:out => output, :components => [:percentage, :spinner, :stat]})
     end
 
     def example_started(example)
@@ -59,7 +59,7 @@ module RspecSpinner
       end.reverse
 
       @example_times[0..14].each do |description, example, location, time|
-        _,line = location.split(":")
+        _, line = location.split(":")
         @output.print red(sprintf("%.7f", time))
         @output.puts " #{description}:#{line} #{example}"
       end
@@ -74,6 +74,12 @@ module RspecSpinner
       # ignore
     end
 
+    def self.fmt_backtrace
+      return "" if backtrace.nil?
+      backtrace = backtrace.split("\n").map { |l| l.strip }
+      backtrace.map { |line| line }.join("\n")
+    end
+
     # stolen and slightly modified from BaseTextFormatter#dump_failure
     def immediately_dump_failure(counter, failure)
       erase_current_line
@@ -81,9 +87,10 @@ module RspecSpinner
       output.print "#{counter.to_s}) "
       # Rspec 1.2.2
       output.puts colorize_failure("#{failure.header}\n#{failure.exception.message}", failure)
-      output.puts format_backtrace(failure.exception.backtrace)
+      output.puts fmt_backtrace(failure.exception.backtrace)
       output.puts
     end
+
 
     # stolen and modified from BaseTextFormatter#dump_pending
     def immediately_dump_pending(desc, msg, location)
@@ -110,10 +117,10 @@ module RspecSpinner
     end
 
     ERROR_STATE_COLORS = {
-      :all_passing  => "\e[32m", # green
-      :some_pending => "\e[33m", # yellow
-      :some_failed  => "\e[31m", # red
-      :pending_fix  => "\e[34m", # blue
+        :all_passing => "\e[32m", # green
+        :some_pending => "\e[33m", # yellow
+        :some_failed => "\e[31m", # red
+        :pending_fix => "\e[34m", # blue
     }
 
     def with_color
