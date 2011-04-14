@@ -76,6 +76,7 @@ module RspecSpinner
 
     def self.fmt_backtrace(bkt)
       return "" if bkt.nil?
+      p bkt
       return bkt.split("\n")
     end
 
