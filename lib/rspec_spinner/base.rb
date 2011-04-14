@@ -76,8 +76,7 @@ module RspecSpinner
 
     def self.fmt_backtrace
       return "" if backtrace.nil?
-      backtrace = backtrace.split("\n").map { |l| l.strip }
-      backtrace.map { |line| line }.join("\n")
+      backtrace
     end
 
     # stolen and slightly modified from BaseTextFormatter#dump_failure
