@@ -76,7 +76,7 @@ module RspecSpinner
 
     def self.fmt_backtrace(bkt)
       return "" if bkt.nil?
-      bkt
+      return bkt.split("\n")
     end
 
     # stolen and slightly modified from BaseTextFormatter#dump_failure
@@ -86,7 +86,7 @@ module RspecSpinner
       output.print "#{counter.to_s}) "
       # Rspec 1.2.2
       output.puts colorize_failure("#{failure.header}\n#{failure.exception.message}", failure)
-      output.puts fmt_backtrace(failure.exception.backtrace)
+      output.puts format_backtrace(fmt_backtrace(failure.exception.backtrace))
       output.puts
     end
 
@@ -95,7 +95,7 @@ module RspecSpinner
     def immediately_dump_pending(desc, msg, location)
       erase_current_line
       output.puts yellow("PENDING SPEC:") + " #{desc} (#{msg})"
-      output.puts fmt_backtrace("  Called from #{location}")
+      output.puts format_backtrace(fmt_backtrace("  Called from #{location}"))
       output.puts
     end
 
