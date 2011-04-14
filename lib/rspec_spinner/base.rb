@@ -97,8 +97,13 @@ module RspecSpinner
       with_color do
         @current += 1
         # HACK: need to make sure the progress is printed, even when the bar hasn't changed
-        @pbar.instance_variable_set("@previous", 0)
-        @pbar.instance_variable_set("@title", "#{current}/#{total}")
+        if /^1\.8/ === RUBY_VERSION then
+          @pbar.instance_variable_set("@previous", 0)
+          @pbar.instance_variable_set("@title", "#{current}/#{total}")
+        else
+          @pbar.instance_variable_set("@previous".to_sym, 0)
+          @pbar.instance_variable_set("@title".to_sym, "#{current}/#{total}")
+        end
         @pbar.inc
       end
       output.flush
