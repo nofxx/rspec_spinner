@@ -8,7 +8,7 @@ begin
     gem.summary = "Extra formatters for Rspec"
     gem.email = "Cool Extra formatters for Rspec"
     gem.homepage = "http://github.com/nofxx/rspec_spinner"
-    gem.authors = ["Marcos Augusto"]
+    gem.authors = ["Marcos Piccinini"]
     gem.add_dependency 'rtui'
     gem.add_development_dependency 'rspec'
     gem.post_install_message = <<-POST_INSTALL_MESSAGE

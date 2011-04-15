@@ -1,5 +1,5 @@
-$:.unshift(File.dirname(__FILE__)) unless
-  $:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
+# $:.unshift(File.dirname(__FILE__)) unless
+#   $:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
 #require "spec/runner/options"
 require "rspec_spinner/base"
 require "rspec_spinner/spinner"
@@ -12,3 +12,4 @@ require "rspec_spinner/bar"
 #    end
 ##  end
 #end
+

@@ -7,6 +7,9 @@ describe "Base" do
     @options = mock('options')
     @options.stub!(:dry_run).and_return(false)
     @options.stub!(:colour).and_return(false)
+    @options.stub!(:print)
+    @options.stub!(:flush)
+    @options.stub!(:puts)
     @formatter = RspecSpinner::Bar.new(@options, @io)
   end
 
@@ -16,7 +19,7 @@ describe "Base" do
   end
 
   it "should produce standard summary without pending when pending has a 0 count" do
-      @options.should_receive(:autospec).and_return(true)
+    @options.should_receive(:autospec).and_return(true)
     @formatter.dump_summary(3, 2, 1, 0)
     @io.string.should eql("\nFinished in 3 seconds\n\n2 examples, 1 failure\n")
   end

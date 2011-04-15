@@ -1,9 +1,15 @@
-require "spec/runner/formatter/base_text_formatter"
+begin
+  require "spec/runner/formatter/base_text_formatter"
+rescue LoadError
+  require "rspec/core/formatters/base_text_formatter"
+end
+
 require "rubygems"
 require "rtui"
 
+
 module RspecSpinner
-  class RspecSpinnerBase < Spec::Runner::Formatter::BaseTextFormatter
+  class RspecSpinnerBase < RSpec::Core::Formatters::BaseTextFormatter
     # Threshold for slow specs, in seconds.
     # Anything that takes longer than this will be printed out
     #THRESHOLD = 0.25
@@ -11,8 +17,8 @@ module RspecSpinner
 
     attr_reader :total, :current
 
-    def initialize(options, where)
-      super
+    def initialize(options, where=nil)
+      super options
       @example_times = []
     end
 
@@ -43,8 +49,9 @@ module RspecSpinner
       increment
     end
 
-    def example_failed(example, counter, failure)
-      immediately_dump_failure(counter, failure)
+    def example_failed(example) #example, counter, failure)
+      p example
+      immediately_dump_failure(example, example)
       mark_error_state_failed
       increment
     end
