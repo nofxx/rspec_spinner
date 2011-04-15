@@ -49,9 +49,8 @@ module RspecSpinner
       increment
     end
 
-    def example_failed(example) #example, counter, failure)
-      p example
-      immediately_dump_failure(example, example)
+    def example_failed(example, counter, failure)
+      immediately_dump_failure(counter, failure)
       mark_error_state_failed
       increment
     end

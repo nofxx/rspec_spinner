@@ -32,6 +32,19 @@ Require RspecSpinner on spec/spec_helper.rb:
   ...
 
 
+=== Rspec 2.x
+
+Add to your project /.rspec
+
+  --require rspec_spinner --format RspecSpinner::Bar
+
+or:
+
+  --require rspec_spinner --format RspecSpinner::Spinner
+
+
+=== Rspec 1.x
+
 Change your spec.opts --format to:
 
   --format RspecSpinner::Bar
