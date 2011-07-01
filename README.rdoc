@@ -1,6 +1,11 @@
 = rspec_spinner
 
-* http://github.com/nofxx/rspec-spinner
+For RSpec 2 there's a new gem working:
+
+https://github.com/jeffkreeftmeijer/fuubar
+
+
+= Not maintained
 
 Adds extra formatters that looks like this:
 
